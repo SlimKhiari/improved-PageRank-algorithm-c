@@ -1,6 +1,6 @@
-# HPC - PageRank algorithm
+# HPC
 
-## HPC - PageRank algorithm
+## PageRank algorithm
 
 Here you will find the improved pageRank algorithm in c.
 
