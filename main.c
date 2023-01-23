@@ -77,7 +77,7 @@ int main()
 	}
 	
 	
-	desallocMatrix(&web_matrix);
+	deallocMatrix(&web_matrix);
 	return 0;
 }
 
