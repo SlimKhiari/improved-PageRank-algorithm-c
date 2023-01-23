@@ -10,7 +10,7 @@ The "matrix_calculation.*" files are intended for calculations and processing re
 
 The "main.c" file is the implementation of the pageRank algorithm.
 
-The "matrix.txt" file representing the links between the nodes must be in this form:
+The "matrix.txt" file, representing the links between the nodes, must be in this form:
 
 ![Screenshot from 2023-01-23 13-10-25](https://user-images.githubusercontent.com/73532355/214036465-692daed0-654e-4e54-a366-61b45cead061.png)
 
