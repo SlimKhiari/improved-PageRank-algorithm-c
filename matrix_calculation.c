@@ -2,6 +2,12 @@
 #include <math.h>
 #include "matrix_calculation.h"
 
+/*
+ Function to build the transition matrix from the matrix in the .txt file
+ @param num_pages : number of nodes in the graph
+ @param link_matrix : the transition matrix
+ @param web_matrix : web graph
+*/
 void initLinkMatrix(int num_pages, float link_matrix[][num_pages], t_matrix *web_matrix)
 {
 	for (int i = 0; i < num_pages; i++)
@@ -33,8 +39,16 @@ void initLinkMatrix(int num_pages, float link_matrix[][num_pages], t_matrix *web
 				}
 			}
 	}
+
 }
 
+/*
+ Function to multiply a matrix by a scalar
+ @param matrix : the matrix
+ @param num_rows : number of rows
+ @param num_cols :number of columns
+ @param scalar : the scalar
+*/
 void scalarMultiplication(float *matrix, int num_rows, int num_cols, float scalar) 
 {
 	int num_entries = num_rows * num_cols;
@@ -44,6 +58,13 @@ void scalarMultiplication(float *matrix, int num_rows, int num_cols, float scala
 	}
 }
 
+/*
+ Function to multiply a matrix by vector
+ @param matrix : the matrix
+ @param num_rows : number of rows
+ @param num_cols :number of columns
+ @param column : the vector
+*/
 void columnMultiplication(float *matrix, int num_rows, int num_cols, float *column) 
 {
 	float product[num_cols];
@@ -64,6 +85,13 @@ void columnMultiplication(float *matrix, int num_rows, int num_cols, float *colu
 	}
 }
 
+/*
+ Function to add 2 matrices
+ @param matrix1 : first matrix
+ @param matrix2 : second matrix
+ @param num_rows : number of rows
+ @param num_cols :number of columns
+*/
 void addition(float *matrix1, float *matrix2, int num_rows, int num_cols) 
 {
 	int num_entries = num_rows * num_cols;
@@ -73,6 +101,11 @@ void addition(float *matrix1, float *matrix2, int num_rows, int num_cols)
 	}
 }
 
+/*
+ Function to calculate the norm
+ @param column : the vector in question
+ @param num_rows : number of lines
+*/
 float norm(float *column, int num_rows) 
 {
 	float sum = 0;

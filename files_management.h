@@ -7,7 +7,7 @@
 #include <string.h>
 
 #define M  "matrix.txt"
-#define TAILLE_TAMPON 1024
+#define TMP 1024
 
 typedef struct
 {
@@ -21,6 +21,6 @@ t_matrix* atoMatrix(char* str);
 t_matrix* allocMatrix(int size);
 void printMatrix(t_matrix* mat);
 void printTab2D(float** tab, int size);
-void desallocMatrix(t_matrix** mat);
+void deallocMatrix(t_matrix** mat);
 
 #endif

@@ -16,7 +16,7 @@ int main()
 	t_matrix *web_matrix = NULL;
 	
 	
-	web_matrix = atoMatrix(readFile(M)); //ASCII TO MATRIX
+	web_matrix = atoMatrix(readFile(M)); 
 		
 		
 	initLinkMatrix(num_pages, link_matrix, web_matrix);
@@ -60,6 +60,7 @@ int main()
 	} while (norm(score_diff, num_pages) > TOLERANCE);
 
 
+	//print the result
 	printf("\nThe stationary state of the walker: \n");
 	for (i = 0; i < num_pages; i++) 
 	{
