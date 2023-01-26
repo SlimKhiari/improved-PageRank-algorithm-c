@@ -36,6 +36,10 @@ By changing the dumping factor to 0.95, we see that the order of importance rema
 
 ![Screenshot from 2023-01-26 08-44-53](https://user-images.githubusercontent.com/73532355/214782759-050ef658-5369-4ce6-a00b-86ae927d92ae.png)
 
+By setting damping factor to 0, all pages become important:
+
+![Screenshot from 2023-01-26 08-49-55](https://user-images.githubusercontent.com/73532355/214783365-a9dbddea-9b17-4dec-ae77-74b43d44dc4b.png)
+
 
 
 
