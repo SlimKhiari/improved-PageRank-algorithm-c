@@ -32,7 +32,7 @@ Here is another run result with another graph with a few more hub and authoritat
 
 ![Screenshot from 2023-01-23 13-07-59](https://user-images.githubusercontent.com/73532355/214781313-cc95d4c6-a075-45e9-8b6f-0e41f66144c7.png)
 
-By changing the dumping factor to 0.95, we see that the order of importance remains the same but with higher values for the first pages and lower values for the last pages:
+By changing the dumping factor to 0.95, we see that the order of importance remains the same but with higher values for the first pages and lower values for the last page:
 
 ![Screenshot from 2023-01-26 08-44-53](https://user-images.githubusercontent.com/73532355/214782759-050ef658-5369-4ce6-a00b-86ae927d92ae.png)
 
