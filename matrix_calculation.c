@@ -19,6 +19,8 @@ void initLinkMatrix(int num_pages, float link_matrix[][num_pages], t_matrix *web
 	}
 	
 	int num_links=0;
+	web_matrix->size = num_pages;
+
 	for(int i=0; i < web_matrix->size; i++)
 	{	
 		num_links=0;

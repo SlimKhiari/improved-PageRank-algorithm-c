@@ -17,7 +17,7 @@ typedef struct
 
 int matrixSize(char* str);
 char* readFile(char* fichier);
-t_matrix* atoMatrix(char* str);
+t_matrix* atoMatrix(char* str,int r, int matrix_size); 
 t_matrix* allocMatrix(int size);
 void printMatrix(t_matrix* mat);
 void printTab2D(float** tab, int size);

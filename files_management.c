@@ -24,8 +24,10 @@ int matrixSize(char* str)
 /*
   Function to make the transition from ASCII TO MATRICE (like atof/atoi)
   @param str : the file read
+  @param r : r = 1 => random, r = 0 => not random 
+  @param matrix_size : matrix_size
 */
-t_matrix* atoMatrix(char* str) 
+t_matrix* atoMatrix(char* str,int r, int matrix_size)
 {
 	t_matrix* mat=NULL;
 	char* current_position=str;
@@ -39,22 +41,46 @@ t_matrix* atoMatrix(char* str)
 		return NULL;
 	}
 
-	sscanf(current_position,"%s", tmp);
-	size=atoi(tmp);
-	current_position += strlen(tmp)+1;
-
-	mat = allocMatrix(size);
-
-	for(i=0; i<mat->size ; i++)
+	if(r == 0)
 	{
-		for(j=0; j<mat->size ; j++)
+		sscanf(current_position,"%s", tmp);
+		size=atoi(tmp);
+		current_position += strlen(tmp)+1;
+		mat = allocMatrix(size);
+
+		for(i=0; i<mat->size ; i++)
 		{
-			sscanf(current_position,"%s", tmp);
-			current_position += strlen(tmp)+1;
-			mat->coeffs[i][j] = atof(tmp);
+			for(j=0; j<mat->size ; j++)
+			{
+				sscanf(current_position,"%s", tmp);
+				current_position += strlen(tmp)+1;
+				mat->coeffs[i][j] = atof(tmp);
+			}
 		}
 	}
-
+	else
+	{
+		sscanf(current_position,"%s", tmp);
+		size=atoi(tmp);
+		current_position += strlen(tmp)+1;
+		mat = allocMatrix(size);
+		
+		if(size != matrix_size)
+		{
+			printf("The matrix size entered and the matrix size in the file selected are different!\n");
+			exit(1);
+		}
+				
+		for(i=0; i<mat->size ; i++)
+		{
+			for(j=0; j<mat->size ; j++)
+			{
+				sscanf(current_position,"%s", tmp);
+				current_position += strlen(tmp)+1;
+				mat->coeffs[i][j] = atof(tmp);
+			}
+		}
+	}
 	return mat;
 }
 
@@ -132,7 +158,7 @@ t_matrix* allocMatrix(int size)
 void printTab2D(float** tab, int size)
 {
 	int i=0,j=0;
-	
+
 	if(tab == NULL)
 	{
 		printf("table does not exist...\n");
@@ -193,4 +219,3 @@ void deallocMatrix(t_matrix** mat)
 	
 	return;
 }
-
