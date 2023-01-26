@@ -22,7 +22,7 @@ the first line represents the number of nodes in the graph. Then, for each line,
 
 ## A few comments
 
-By testing our code  with values 10^-6, 10⁻8 and 10⁻10 of TOLERANCE variable, the execution result remains the same.
+By testing our code with the values 10^-6, 10^⁻8 and 10^⁻10 of the TOLERANCE variable, the execution result remains almost the same.
 
 Here is another run result with another graph with a few more hub and authoritative nodes with a dumping factor of 0.85:
 
