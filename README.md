@@ -22,8 +22,15 @@ the first line represents the number of nodes in the graph. Then, for each line,
 
 ## A few comments
 
-By testing our code with values ​​10^-6, 10⁻8 and 10⁻10, the execution result remains the same.
+By testing our code  with values 10^-6, 10⁻8 and 10⁻10 of TOLERANCE variable, the execution result remains the same.
 
+Here is another run result with another graph with a few more hub and authoritative nodes:
+
+file:///home/slim/Pictures/Screenshots/Screenshot%20from%202023-01-26%2008-31-22.png![image](https://user-images.githubusercontent.com/73532355/214781170-22af7259-95ce-4cd6-a9![Screenshot from 2023-01-23 13-10-25](https://user-images.githubusercontent.com/73532355/214781283-51bb202d-8181-4a4f-87a5-7e6f7c578d47.png)
+1c-1e0eebb4505f.png)
+![Uploading Screenshot from 2023-01-23 13-10-25.png…]()
+
+![Screenshot from 2023-01-23 13-07-59](https://user-images.githubusercontent.com/73532355/214781313-cc95d4c6-a075-45e9-8b6f-0e41f66144c7.png)
 
 
 
