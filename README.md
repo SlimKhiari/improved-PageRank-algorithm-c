@@ -20,3 +20,10 @@ the first line represents the number of nodes in the graph. Then, for each line,
 
 ![Screenshot from 2023-01-23 13-07-59](https://user-images.githubusercontent.com/73532355/214036097-f0dbf70a-9c07-44dc-9315-8083d09f2e7e.png)
 
+## A few comments
+
+By testing our code with values ​​10^-6, 10⁻8 and 10⁻10, the execution result remains the same.
+
+
+
+
