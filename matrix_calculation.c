@@ -8,7 +8,7 @@
  @param link_matrix : the transition matrix
  @param web_matrix : web graph
 */
-void initLinkMatrix(int num_pages, float** link_matrix, t_matrix *web_matrix)
+float** initLinkMatrix(int num_pages, float** link_matrix, t_matrix *web_matrix)
 {
 	for (int i = 0; i < num_pages; i++)
 	{
@@ -41,7 +41,7 @@ void initLinkMatrix(int num_pages, float** link_matrix, t_matrix *web_matrix)
 				}
 			}
 	}
-
+	return link_matrix;
 }
 
 /*
@@ -124,9 +124,11 @@ float norm(float *column, int num_rows)
  @param column : the vector in question
  @param num_rows : number of lines
 */
-void final_result_calculation(int num_pages, float max_score, float score_column[num_pages])
+void final_result_calculation(int num_pages, float *score_column)
 {
 	int i,j,page_num=0;
+	float max_score;
+	
 	printf("\nThe stationary state of the walker: \n");
 	for (i = 0; i < num_pages; i++) 
 	{
@@ -141,7 +143,7 @@ void final_result_calculation(int num_pages, float max_score, float score_column
 		}
 		score_column[page_num] = 0;
 		printf("%d) Page %d: %f\n", i + 1, page_num + 1, max_score);
-	}
+	} 
 }
 
 /*
@@ -150,7 +152,7 @@ void final_result_calculation(int num_pages, float max_score, float score_column
  @score_column : score array
  @param num_pages : number of pages in the graph
 */
-void initial_vector_calculation(int num_pages, float score_column[num_pages])
+void initial_vector_calculation(int num_pages, float* score_column)
 {
 	float entry = 1 / (float) num_pages;
 	for (int i = 0; i < num_pages; i++) 

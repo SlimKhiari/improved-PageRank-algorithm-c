@@ -6,30 +6,20 @@
 #include "files_management.h"
 #include <time.h>
 
+int number_of_pages;
+
    // -------------------------------------------------------------------------------------------------------------------------------------
    //
    //    [ PAGERANK ALGORITHM ]
-   //    a function accepting as inputs the transition matrix, the juming parameters as well as an initial vector
+   //    a function accepting as inputs the transition matrix, the dumping factor as well as an initial vector
    //    and at output the vector representing the stationary state calculated by the PageRank  algorithm
    //
    // -------------------------------------------------------------------------------------------------------------------------------------
 
-void cPageRank(float** transition_matrix, float dumping_factor, int number_of_pages, float* initial_vector, char* file)
+float* cPageRank(float transition[number_of_pages][number_of_pages],float dumping_factor, float* initial_vector, float* score_column, float mean_column[number_of_pages])
 {
-	float transition[number_of_pages][number_of_pages];
-	float score_diff[number_of_pages], score_column[number_of_pages], mean_column[number_of_pages];
-	t_matrix *web_matrix_from_file = atoMatrix(readFile(file), 0, number_of_pages); 
-	float max_score;
+	float score_diff[number_of_pages];
 		
-	initLinkMatrix(number_of_pages, transition_matrix, web_matrix_from_file);
-	
-	printf("The web graph:\n");
-	printMatrix(web_matrix_from_file);
-	printf("\nThe transition matrix:\n");
-	printFloatMatrix(number_of_pages, transition_matrix, transition, mean_column, initial_vector);
-	
-	
-	initial_vector_calculation(number_of_pages, score_column); // (1/n, 1/n, ... , 1/n)T
 	scalarMultiplication(transition[0], number_of_pages, number_of_pages, dumping_factor); //alpha * P
 	scalarMultiplication(mean_column, number_of_pages, 1, 1-dumping_factor); // (1-alpha) * (1/n, 1/n, ... , 1/n)T
 	
@@ -44,10 +34,8 @@ void cPageRank(float** transition_matrix, float dumping_factor, int number_of_pa
 		scalarMultiplication(score_diff, number_of_pages, 1, -1);
 		addition(score_diff, score_column, number_of_pages, 1);
 	} while (norm(score_diff, number_of_pages) > TOLERANCE);
-
-	final_result_calculation(number_of_pages, max_score, score_column);
-	
-	deallocMatrix(&web_matrix_from_file);
+			
+	return score_column;
 }
 
 int main(int argc, char *argv[]) 
@@ -64,20 +52,36 @@ int main(int argc, char *argv[])
     if(argc==1)
     {
 	
-	int number_of_pages = matrixSize(readFile("matrix.txt")); 
-	float entry = 1 / (float) number_of_pages;
+	number_of_pages = matrixSize(readFile("matrix.txt"));
+	float page_num; 
+	float entry = 1 / (float) number_of_pages, max_score;
 	float** link_matrix = floatAlocDynamic_2D(number_of_pages); 
 	float *initial_vector = floatAlocDynamic_1D(number_of_pages);
-
+	float*  score_column = malloc (sizeof (float) * number_of_pages);
+	t_matrix *web_matrix_from_file = atoMatrix(readFile("matrix.txt"), 0, number_of_pages); 
+	float transition[number_of_pages][number_of_pages];
+	float mean_column[number_of_pages];
+		
 	for (int i = 0; i < number_of_pages; i++) 
 	{
 		initial_vector[i] = entry; 
 	}
 	
-	cPageRank(link_matrix, 0.85, number_of_pages, initial_vector, "matrix.txt");
+	link_matrix = initLinkMatrix(number_of_pages, link_matrix, web_matrix_from_file);
+	printf("The web graph:\n");
+	printMatrix(web_matrix_from_file);
+	printf("\nThe transition matrix:\n");
+	printFloatMatrix(number_of_pages, link_matrix, transition, mean_column, initial_vector);
+		
+	initial_vector_calculation(number_of_pages, score_column); // (1/n, 1/n, ... , 1/n)T
+	score_column = cPageRank(transition, 0.85, initial_vector,score_column,mean_column);
+	
+	final_result_calculation(number_of_pages, score_column);
 	
 	deallocFloatMatrix_2D(link_matrix, number_of_pages);
+	deallocMatrix(&web_matrix_from_file);
 	deallocFloatVector_1D(initial_vector);
+	deallocFloatVector_1D(score_column);
 	
    }
    
@@ -96,9 +100,11 @@ int main(int argc, char *argv[])
   
    else if(argc>=2)
    {
-    	  int number_of_pages; number_of_pages = atoi(argv[1]); 
+    	  number_of_pages = atoi(argv[1]);
+    	  int  page_num;
        char *graph_file_name = argv[2];
 	  int web_matrix[number_of_pages][number_of_pages];
+	  float*  score_column = malloc (sizeof (float) * number_of_pages);
 	   
 	  time_t t;    srand((unsigned) time(&t));
 	   
@@ -149,22 +155,37 @@ int main(int argc, char *argv[])
 		    printf("%s ",argv[0]); printf("%s ",argv[1]); printf("%s\n",argv[2]);
 	   }
 	   else //pageRank
-	   {		
-			float entry = 1 / (float) number_of_pages;
+	   {																
+			float entry = 1 / (float) number_of_pages, max_score;
 			float** link_matrix = floatAlocDynamic_2D(number_of_pages); 
 			float *initial_vector = floatAlocDynamic_1D(number_of_pages);
+			float*  score_column = malloc (sizeof (float) * number_of_pages);
+			t_matrix *web_matrix_from_file = atoMatrix(readFile(graph_file_name), 0, number_of_pages); 		
+			float transition[number_of_pages][number_of_pages];
+			float mean_column[number_of_pages];
 
 			for (int i = 0; i < number_of_pages; i++) 
 			{
 				initial_vector[i] = entry; 
 			}
+
+			link_matrix = initLinkMatrix(number_of_pages, link_matrix, web_matrix_from_file);
+			printf("The web graph:\n");
+			printMatrix(web_matrix_from_file);
+			printf("\nThe transition matrix:\n");
+			printFloatMatrix(number_of_pages, link_matrix, transition, mean_column, initial_vector);
+				
+			initial_vector_calculation(number_of_pages, score_column); // (1/n, 1/n, ... , 1/n)T
+			score_column = cPageRank(transition, 0.85, initial_vector,score_column,mean_column);
 			
-			cPageRank(link_matrix, 0.85, number_of_pages, initial_vector, graph_file_name);
+			final_result_calculation(number_of_pages, score_column);
 			
 			deallocFloatMatrix_2D(link_matrix, number_of_pages);
+			deallocMatrix(&web_matrix_from_file);
 			deallocFloatVector_1D(initial_vector);
+			deallocFloatVector_1D(score_column);
     	   }
-    	}
+   }
     	    	      
    return 0;
 }
