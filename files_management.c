@@ -151,6 +151,41 @@ t_matrix* allocMatrix(int size)
 }
 
 /*
+  Function to allocate memory space for float matrix
+  @param size : the size of the transition matrix
+*/
+float** floatAlocDynamic_2D( int size )
+{
+    float **mat = ( float ** )malloc( size * sizeof( float * ) );
+
+    for ( int i = 0; i < size; i++ )
+    {
+        mat[i] = ( float * )malloc( size * sizeof( float ) );
+        for(int j=0; j<size ; j++)
+	   {
+			mat[i][j] = -1;
+	   }
+    }
+
+    return mat;
+}
+
+/*
+  Function to allocate memory space for a ector
+  @param size : the size of the vector
+*/
+float* floatAlocDynamic_1D(int size)
+{
+	float *vect = malloc(size * sizeof(float));
+	for( int i = 0; i < size; i++)
+	{
+	   vect[i] = -1;
+	}
+	return vect;
+}
+
+ 
+/*
   Function to print a 2D table
   @param size : the size of the matrix
   @param tab: the 2D table to be printed
@@ -178,7 +213,7 @@ void printTab2D(float** tab, int size)
 }
 
 /*
-  Function to print a matrix
+  Function to print a t_matrix matrix
   @param mat : the matrix to be printed
 */
 void printMatrix(t_matrix* mat)
@@ -195,7 +230,29 @@ void printMatrix(t_matrix* mat)
 }
 
 /*
-  Function to deallocate the allocated space for 2D table
+  Function to print a matrix (with some operations)
+  @param num_pages : number of pages
+  @transition_matrix : transition matrix to be printed
+  @transition : transition matrix to be used in pagerank algorithm
+  @mean_column : initial vector to be user in pagerank algorithm
+  @initial_vector : initial vector entered by the user
+*/
+void printFloatMatrix(int num_pages, float **transition_matrix, float transition[num_pages][num_pages], float mean_column[num_pages], float *initial_vector)
+{
+	for(int i=0; i<num_pages; i++)
+	{
+		for(int j=0; j<num_pages; j++)
+		{
+			transition[i][j] = transition_matrix[i][j];
+			printf("%f ",transition_matrix[i][j]);
+		}
+		mean_column[i] = initial_vector[i];
+		printf("\n");
+	}
+}
+
+/*
+  Function to deallocate the allocated space for 2D t_matrix table
   @param mat : the matrix to be deallocated
 */
 void deallocMatrix(t_matrix** mat)
@@ -216,6 +273,32 @@ void deallocMatrix(t_matrix** mat)
 	free(*mat);
 	
 	*mat = NULL;
+	
+	return;
+}
+
+/*
+  Function to deallocate the allocated space for 2D float table
+  @param mat : the matrix to be deallocated
+*/
+void deallocFloatMatrix_2D(float** mat, int size)
+{
+    for(int i = 0; i < size; i++)
+    {
+        free(mat[i]);
+    }
+    free(mat);
+	
+	return;
+}
+
+/*
+  Function to deallocate a vector
+  @param mat : the matrix to be deallocated
+*/
+void deallocFloatVector_1D(float* vect)
+{
+    free(vect);
 	
 	return;
 }

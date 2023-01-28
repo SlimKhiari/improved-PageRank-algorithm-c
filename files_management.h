@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define M  "matrix.txt"
 #define TMP 1024
 
 typedef struct
@@ -22,5 +21,10 @@ t_matrix* allocMatrix(int size);
 void printMatrix(t_matrix* mat);
 void printTab2D(float** tab, int size);
 void deallocMatrix(t_matrix** mat);
+float ** floatAlocDynamic_2D( int size );
+void deallocFloatMatrix_2D(float** mat, int size);
+void deallocFloatVector_1D(float* vect);
+float* floatAlocDynamic_1D(int size);
+void printFloatMatrix(int num_pages, float **transition_matrix, float transition[num_pages][num_pages], float mean_column[num_pages], float *initial_vector);
 
 #endif
