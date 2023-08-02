@@ -1,6 +1,6 @@
-# HPC
+# HPC - High Performance Computing 
 
-## PageRank algorithm
+## PageRank algorithm (by Google)
 
 Here you will find the improved pageRank algorithm in c.
 
